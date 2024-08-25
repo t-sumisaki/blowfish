@@ -17,6 +17,10 @@
       {{- $url:= .Params.featureimage -}}
       {{ $featured = resources.GetRemote $url }}
       {{ end }}
+      {{ if and .Params.cover (not $featured) }}
+      {{ /* assign common cover */ }}
+      {{ $featured = resources.Get .Params.cover }}
+      {{ end }}
       {{- if not $featured }}{{ with .Site.Params.defaultFeaturedImage }}{{ $featured = resources.Get . }}{{ end }}{{ end -}}
       {{ if .Params.hideFeatureImage }}{{ $featured = false }}{{ end }}
       {{- with $featured -}}
