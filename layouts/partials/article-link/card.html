@@ -31,6 +31,11 @@
       {{ end }}
     {{ end }}
 
+    {{/* from site common image */}}
+    {{ if and .Params.cover not (or $featured $featuredURL) }}
+      {{ $featured = resources.Get .Params.cover }}
+    {{ end }}
+
     {{/* fallback to default */}}
     {{ if not (or $featured $featuredURL) }}
       {{ $default := site.Store.Get "defaultFeaturedImage" }}
